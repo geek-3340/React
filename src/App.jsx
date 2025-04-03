@@ -1,16 +1,29 @@
+import { useEffect, useState } from 'react';
 import './App.css'
 import Button from './components/Button/Button'
+import Display from './components/Display/Display'
 
 function App() {
-  const handleClick = () => {
-    alert('Clicked!');
-  };
+
+  const [count,setCount]=useState(0);
+
+  useEffect(()=>{
+    console.log('counted + ',count);
+  },[count])
+
+  const testGreeting=()=>{
+    console.log('Hello World!');
+  }
 
   return (
     <>
-      <h1>Hello REACT!</h1>
-      <Button disable={false} type={'button'} onClick={handleClick}>
-        Click Me
+      <Display count={count} />
+      <br />
+      <Button disable={false} type={'button'} onClick={() => { 
+        setCount(count + 1)
+        testGreeting()
+        }}>
+        <span>Click Me</span>
       </Button>
     </>
   )
