@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 
 function Display(props) {
   const [text, setText] = useState('Loading...');
-  const [initialized, setInitialized] = useState(false);
+  const [initialized, setInitialized] = useState(false); // 初回レンダリングを判定するためのフラグ
 
+  // useEffectを使ってcountが変化したときに実行される処理を定義
   useEffect(() => {
     if (!initialized) {
       setTimeout(() => {
@@ -13,7 +14,7 @@ function Display(props) {
     } else {
       setText(`count : ${props.count}`); // 初回以降は即座に更新
     }
-  }, [props.count, initialized]);
+  }, [props.count]);
 
   return <div>{text}</div>;
 }

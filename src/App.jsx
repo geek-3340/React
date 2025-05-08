@@ -6,16 +6,24 @@ import Display from './components/Display';
 function App() {
   const [count, setCount] = useState(0);
 
-  // const [theFirstRender, setTheFirstRender] = useState(true);
+  // 初回レンダリングを判定するためのフラグ
+  // useStateを使って初期値をtrueに設定
+  const [theFirstRender, setTheFirstRender] = useState(true);
 
+  // useEffectを使ってcountが変化したときに実行される処理を定義
+  // 初回レンダリングの時はフラグをfalseにして、処理を終了
+  // 2回目以降はフラグがtrueになっているので、処理を実行
   useEffect(() => {
-    // if (theFirstRender) {
-    //   setTheFirstRender(false);
-    //   return;
-    // }
+    // 初回レンダリングでのcount初期化時に実行されるのを防ぐ処理
+    // 以下では初回のフラグがtrueとなり、処理をスキップ
+    if (theFirstRender) {
+      setTheFirstRender(false); // 2回目以降のレンダリングで実行されるようにフラグをfalseにする
+      return;
+    }
     console.log(`countが${count}になりました`);
   }, [count]);
 
+  
   const handleClick = () => {
     setCount(count + 1);
   };
